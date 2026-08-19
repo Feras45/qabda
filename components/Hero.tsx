@@ -113,7 +113,7 @@ export default function Hero() {
             <div className="stitch mt-4" />
             <div className="mt-4 flex items-center justify-between font-display">
               <span className="text-sm font-semibold text-faded">QBD-PRO / 60CM</span>
-              <span className="text-sm font-semibold text-sand">250 KG TESTED</span>
+              <span className="text-sm font-semibold text-sand">12-PLY COTTON</span>
             </div>
           </div>
         </motion.div>

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "قبضة QABDA — أحزمة رفع الأثقال",
   description:
-    "أحزمة رفع أثقال بقطن كثيف وبطانة نيوبرين، مختبرة حتى 250 كجم. دفع عند الاستلام، مدى، وApple Pay. توصيل سريع للسعودية والخليج.",
+    "أحزمة رفع أثقال من قطن قوي مع بطانة ناعمة تريّح معصمك. دفع عند الاستلام، مدى، وApple Pay. توصيل سريع للسعودية والخليج.",
   openGraph: {
     title: "قبضة QABDA — أحزمة رفع الأثقال",
     description: "ارفع أثقل. أمسك أطول. توصيل سريع لكل الخليج.",
