@@ -71,7 +71,9 @@ export default async function AdminPage({ searchParams }: { searchParams: { key?
             {orders.map((o) => (
               <tr key={o.id} className="border-t border-line hover:bg-coal/60">
                 <td className="px-4 py-3 font-display font-bold text-sand">{o.order_number}</td>
-                <td className="px-4 py-3 text-faded">{new Date(o.created_at).toLocaleString("en-GB")}</td>
+                <td className="px-4 py-3 text-faded">
+                  {new Date(o.created_at).toLocaleString("en-GB", { timeZone: "Asia/Riyadh", hour12: false })}
+                </td>
                 <td className="px-4 py-3">{o.customer_name}</td>
                 <td className="px-4 py-3">{o.phone}</td>
                 <td className="px-4 py-3 text-faded">

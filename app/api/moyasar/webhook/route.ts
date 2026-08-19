@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSql, ensureSchema } from "@/lib/db";
+import { notifyPaymentConfirmed } from "@/lib/notify";
 
 export const runtime = "nodejs";
 
@@ -25,11 +26,15 @@ export async function POST(req: Request) {
     await ensureSchema(sql);
 
     if (body.type === "payment_paid" || payment?.status === "paid") {
-      await sql`
+      // `returning` tells us whether this call actually flipped the row, so a
+      // repeated webhook delivery doesn't fire a duplicate notification.
+      const changed = (await sql`
         update orders
         set payment_status = 'paid', payment_id = ${payment.id}
         where order_number = ${orderNumber} and payment_status <> 'paid'
-      `;
+        returning order_number
+      `) as { order_number: string }[];
+      if (changed.length > 0) await notifyPaymentConfirmed(orderNumber, payment.id);
     } else if (body.type === "payment_failed" || payment?.status === "failed") {
       await sql`
         update orders

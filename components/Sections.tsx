@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 
@@ -181,6 +182,17 @@ export function Footer() {
           </p>
         </div>
         <div className="stitch mt-8" />
+        <nav className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          <Link href="/policies" className="text-faded transition-colors hover:text-bone">
+            {t.footer.policies}
+          </Link>
+          <Link href="/policies#returns" className="text-faded transition-colors hover:text-bone">
+            {t.footer.returns}
+          </Link>
+          <Link href="/policies#privacy" className="text-faded transition-colors hover:text-bone">
+            {t.footer.privacy}
+          </Link>
+        </nav>
         <p className="mt-6 text-xs text-faded">{t.footer.rights}</p>
       </div>
     </footer>

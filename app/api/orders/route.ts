@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSql, ensureSchema } from "@/lib/db";
+import { notifyNewOrder } from "@/lib/notify";
 import {
   MAX_QTY,
   subtotalFor,
@@ -64,6 +65,21 @@ export async function POST(req: Request) {
            ${method}, ${paymentStatus})
       `;
     }
+
+    // Ping the owner. Never allowed to fail the order.
+    await notifyNewOrder({
+      orderNumber: number,
+      name,
+      phone,
+      country,
+      city,
+      address,
+      notes,
+      color,
+      quantity,
+      total,
+      method,
+    });
 
     return NextResponse.json({
       ok: true,

@@ -28,8 +28,49 @@ Without any env vars the site runs in **demo mode**: the full order flow works b
 | `MOYASAR_SECRET_KEY` | Moyasar secret key. Used server-side to verify payments on `/success`. |
 | `MOYASAR_WEBHOOK_SECRET` | Shared token you set in the Moyasar webhook config. |
 | `ADMIN_KEY` | Open `/admin?key=<ADMIN_KEY>` to view orders. |
+| `NEXT_PUBLIC_MERCHANT_*` | Store identity shown on `/policies` — `NAME`, `CR`, `VAT`, `ADDRESS`, `EMAIL`, `PHONE`. **Required before launch** (see Compliance). |
+| `NEXT_PUBLIC_MAROOF_URL` | Your store's maroof.sa page. |
+| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Optional. Pushes each new order to Telegram. |
+| `RESEND_API_KEY` / `ORDER_EMAIL_TO` / `ORDER_EMAIL_FROM` | Optional. Emails each new order via Resend. |
 | `NEXT_PUBLIC_WHATSAPP` | Optional. `9665XXXXXXXX` — shows an "order via WhatsApp" link. |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for metadata. |
+
+## Order notifications
+
+`lib/notify.ts` pings you when an order is created, and again when Moyasar confirms a
+card payment. Two independent channels — configure either, both, or neither:
+
+- **Telegram** — message `@BotFather` → `/newbot` → copy the token. Message your new bot
+  once, then open `https://api.telegram.org/bot<TOKEN>/getUpdates` to read your chat id.
+- **Email** — a Resend API key plus a from-address on a domain verified in Resend.
+
+Notifications are fire-and-forget: a failing channel is logged and never blocks or fails
+an order. With nothing configured it's a no-op, and `/admin` remains the source of truth.
+
+## Compliance (Saudi Arabia)
+
+`/policies` carries the disclosures the Saudi E-Commerce Law (2019) requires, and the
+footer links to it. Before taking real orders:
+
+1. **Fill in `NEXT_PUBLIC_MERCHANT_*`** — trade name, CR number, address, and contact
+   details are a legal requirement, and empty fields are hidden rather than shown blank.
+2. **Register on [maroof.sa](https://maroof.sa)** and set `NEXT_PUBLIC_MAROOF_URL`.
+3. **Have the policy text reviewed.** `lib/legal.ts` is written in good faith against the
+   law, not by a lawyer, and it must match the terms you actually operate under.
+
+What the policy page commits you to, and what the law requires:
+
+| Rule | Where it comes from |
+| --- | --- |
+| Cancel within **7 days** of delivery, no reason needed, if unused | E-Commerce Law art. 13 |
+| Cancel and refund if undelivered after **15 days** | E-Commerce Law |
+| Refund via the **original payment method within 15 days** | Implementing Regulations |
+| Disclose identity, CR, contact, total price, shipping, delivery time, return policy | E-Commerce Law |
+
+The 14-day exchange and 1-year warranty are our own terms, on top of the statutory
+minimum. VAT registration is mandatory above SAR 375,000 of taxable revenue in a rolling
+12 months (voluntary from SAR 187,500) — once registered you must issue ZATCA-compliant
+e-invoices, which this app does **not** do.
 
 ## Payments (Moyasar)
 
