@@ -83,44 +83,6 @@ export function Stats() {
   );
 }
 
-/* ---------------- Reviews ---------------- */
-export function Reviews() {
-  const { t } = useLang();
-  return (
-    <section id="reviews" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
-      <p className="font-display text-sm font-semibold tracking-wide text-sand">{t.reviews.eyebrow}</p>
-      <h2 className="mt-2 font-display text-4xl font-extrabold md:text-5xl">{t.reviews.title}</h2>
-
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {t.reviews.items.map((r, i) => (
-          <motion.figure
-            key={r.name}
-            custom={i}
-            variants={rise}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-col justify-between rounded-xl border border-line bg-coal p-6 transition-colors hover:border-sand/50"
-          >
-            <div>
-              <div className="flex gap-1 text-ember" aria-label="5/5">
-                {"★★★★★".split("").map((s, j) => (
-                  <span key={j}>{s}</span>
-                ))}
-              </div>
-              <blockquote className="mt-4 leading-relaxed text-bone/90">{r.text}</blockquote>
-            </div>
-            <figcaption className="mt-6 border-t border-line pt-4 text-sm">
-              <span className="font-display font-bold text-bone">{r.name}</span>
-              <span className="text-faded"> · {r.city}</span>
-            </figcaption>
-          </motion.figure>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 /* ---------------- FAQ ---------------- */
 export function Faq() {
   const { t } = useLang();

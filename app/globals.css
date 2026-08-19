@@ -57,15 +57,6 @@ body {
   -webkit-text-stroke: 1.5px rgba(196, 168, 118, 0.22);
 }
 
-/* ---------- Marquee ---------- */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee 26s linear infinite;
-}
-
 /* ---------- Grain ---------- */
 .grain::after {
   content: "";
@@ -103,7 +94,6 @@ textarea:focus-visible {
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .marquee-track { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

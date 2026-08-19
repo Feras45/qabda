@@ -61,6 +61,7 @@ All in `lib/config.ts` (client display) and re-enforced server-side in `/api/ord
 ## Customization notes
 
 - **Product photography**: the recolorable SVG in `components/StrapArt.tsx` is a placeholder. When real shots are ready, replace it with `next/image` renders per color variant (`public/products/{black,sand,ember}.jpg`).
-- **Copy**: all AR/EN copy lives in one dictionary, `lib/i18n.tsx`. The reviews there are sample placeholders — replace with real customer reviews before launch.
+- **Copy**: all AR/EN copy lives in one dictionary, `lib/i18n.tsx`. Copy is deliberately plain — it only states what the product is, with no lab/testing claims. Keep it that way unless you can back a claim.
+- **Reviews**: there is no reviews section. Add one only when you have real customer reviews to show.
 - **Design tokens**: palette and fonts in `tailwind.config.ts` (ink/coal/bone/sand/ember, Changa + IBM Plex Sans Arabic). The dashed "stitch" motif is defined in `app/globals.css`.
 - **Admin**: `/admin?key=...` is a read-only order list. For anything beyond low volume, put it behind real auth.

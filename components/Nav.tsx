@@ -16,7 +16,6 @@ export default function Nav() {
 
         <nav className="hidden items-center gap-8 text-sm text-faded md:flex">
           <a href="#product" className="transition-colors hover:text-bone">{t.nav.details}</a>
-          <a href="#reviews" className="transition-colors hover:text-bone">{t.nav.reviews}</a>
           <a href="#faq" className="transition-colors hover:text-bone">{t.nav.faq}</a>
         </nav>
 
